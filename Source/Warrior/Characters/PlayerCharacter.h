@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Warrior/Characters/WarriorBaseCharacter.h"
+#include "WarriorBaseCharacter.h"
 #include "PlayerCharacter.generated.h"
 
 /**
@@ -18,8 +18,11 @@ class WARRIOR_API APlayerCharacter : public AWarriorBaseCharacter
 
 protected:
 
+	virtual void BeginPlay() override;
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	//普通按键的绑定
 	UFUNCTION()
 	void JumpStart();
 
@@ -29,6 +32,7 @@ protected:
 	UFUNCTION()
 	void MoveForward(float X);
 
+	UFUNCTION()
 	void MoveRight(float X);
 
 	UFUNCTION()
@@ -36,5 +40,10 @@ protected:
 
 	UFUNCTION()
 	void LookUp(float X);
+
+
+
+	
+	
 	
 };

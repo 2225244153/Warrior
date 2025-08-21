@@ -14,6 +14,7 @@ public class Warrior : ModuleRules
 			"Core", "CoreUObject", "Engine", "InputCore" 
 			,"GameplayAbilities", "GameplayTags", "GameplayTasks"
 			,"UMG", "Slate", "SlateCore"
+			,"EnhancedInput"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

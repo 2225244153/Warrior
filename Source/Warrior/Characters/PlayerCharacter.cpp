@@ -1,20 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Warrior/Characters/PlayerCharacter.h"
-
+#include "PlayerCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Kismet/KismetSystemLibrary.h"
 
 APlayerCharacter::APlayerCharacter()
 {
 	
 }
 
+void APlayerCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	
+
+	//普通按鍵綁定
 	PlayerInputComponent->BindAction(TEXT("Jump"),IE_Pressed,this,&APlayerCharacter::JumpStart);
 	PlayerInputComponent->BindAction(TEXT("Jump"),IE_Released,this,&APlayerCharacter::JumpEnd);
 
@@ -22,7 +26,10 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("MoveRight/Left"),this,&APlayerCharacter::MoveRight);
 
 	PlayerInputComponent->BindAxis(TEXT("TurnRight/LeftMouse"),this,&APlayerCharacter::TurnRight);
-	PlayerInputComponent->BindAxis(TEXT("LookUp/DownMouse"),this,&APlayerCharacter::LookUp);
+	//PlayerInputComponent->BindAxis(TEXT("LookUp/DownMouse"),this,&APlayerCharacter::LookUp);
+
+	
+	
 }
 
 void APlayerCharacter::JumpStart()
@@ -54,3 +61,5 @@ void APlayerCharacter::LookUp(float X)
 {
 	AddControllerPitchInput(X);
 }
+
+
