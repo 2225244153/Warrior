@@ -20,6 +20,7 @@ protected:
 
 	virtual void BeginPlay() override;
 
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 	//普通按键的绑定
@@ -28,6 +29,9 @@ protected:
 
 	UFUNCTION()
 	void JumpEnd();
+	
+	UFUNCTION()
+	void Attack();
 	
 	UFUNCTION()
 	void MoveForward(float X);

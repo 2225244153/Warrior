@@ -4,16 +4,27 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include "WarriorBaseCharacter.generated.h"
 
+class UAbilitySystemComponent;
+
 UCLASS()
-class WARRIOR_API AWarriorBaseCharacter : public ACharacter
+class WARRIOR_API AWarriorBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
 	AWarriorBaseCharacter();
-	
 
+protected:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AbilitySystem")
+	UAbilitySystemComponent* AbilitySystemComponent;
+
+	virtual void BeginPlay() override;
+public:
+	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
 };
