@@ -7,6 +7,7 @@
 #include "AbilitySystemInterface.h"
 #include "WarriorBaseCharacter.generated.h"
 
+struct FGameplayTagContainer;
 class UAbilitySystemComponent;
 
 UCLASS()
@@ -26,5 +27,12 @@ protected:
 public:
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AbilitySystem")
+	TArray<FGameplayTagContainer> GameplayTagContainers;
+
+	UFUNCTION(BlueprintCallable)
+	void ActiveAbility(int32 TagIndex);
+	
 	
 };

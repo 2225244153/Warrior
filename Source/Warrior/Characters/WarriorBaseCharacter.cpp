@@ -4,6 +4,7 @@
 #include "Warrior/Characters/WarriorBaseCharacter.h"
 #include "AbilitySystemComponent.h"
 #include "MonsterCharacter.h"
+#include "Warrior/GameplayAbility/BaseGameplayAbility.h"
 
 
 AWarriorBaseCharacter::AWarriorBaseCharacter()
@@ -17,11 +18,16 @@ void AWarriorBaseCharacter::BeginPlay()
 	Super::BeginPlay();
 	if (AbilitySystemComponent)
 	{
-		//AbilitySystemComponent->GiveAbility();
+		AbilitySystemComponent->GiveAbility();
 	}
 }
 
 UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent; 
+}
+
+void AWarriorBaseCharacter::ActiveAbility(int32 TagIndex)
+{
+	AbilitySystemComponent->TryActivateAbilitiesByTag(GameplayTagContainers[TagIndex]);
 }

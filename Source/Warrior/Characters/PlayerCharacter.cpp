@@ -2,6 +2,8 @@
 
 
 #include "PlayerCharacter.h"
+
+#include "AbilitySystemComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
 APlayerCharacter::APlayerCharacter()
@@ -46,8 +48,10 @@ void APlayerCharacter::JumpEnd()
 
 void APlayerCharacter::Attack()
 {
-	UAnimMontage* Melee = LoadObject<UAnimMontage>(nullptr,TEXT("/Script/Engine.AnimMontage'/Game/A_Game/Animation/Montage/AM_Attack.AM_Attack'"));
-	PlayAnimMontage(Melee);
+	/*UAnimMontage* Melee = LoadObject<UAnimMontage>(nullptr,TEXT("/Script/Engine.AnimMontage'/Game/A_Game/Animation/Montage/AM_Attack.AM_Attack'"));
+	PlayAnimMontage(Melee);*/
+	//AbilitySystemComponent->TryActivateAbilitiesByTag()
+	ActiveAbility(0);
 }
 
 void APlayerCharacter::MoveForward(float X)
