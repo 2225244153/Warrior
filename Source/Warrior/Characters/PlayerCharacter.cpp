@@ -3,17 +3,21 @@
 
 #include "PlayerCharacter.h"
 
-#include "AbilitySystemComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 APlayerCharacter::APlayerCharacter()
 {
-	
+
 }
 
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AttackCapsule->OnComponentBeginOverlap.AddDynamic(this,&APlayerCharacter::OnComponentBeginOverlap);
+
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -72,6 +76,19 @@ void APlayerCharacter::TurnRight(float X)
 void APlayerCharacter::LookUp(float X)
 {
 	AddControllerPitchInput(X);
+}
+
+void APlayerCharacter::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor != this && OtherActor->GetClass() != this->GetClass())
+	{
+		/*if (AWarriorBaseCharacter* BaseCharacter = Cast<AWarriorBaseCharacter>(OtherActor))
+		{
+		UE_LOG(LogTemp,Error,TEXT("PlayerCharacter::OnComponentBeginOverlap"));
+		}*/
+		UE_LOG(LogTemp,Error,TEXT("Name = %s"),*UKismetSystemLibrary::GetDisplayName(OtherActor));
+	}
 }
 
 
