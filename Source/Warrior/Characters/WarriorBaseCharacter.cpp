@@ -3,7 +3,6 @@
 
 #include "Warrior/Characters/WarriorBaseCharacter.h"
 #include "AbilitySystemComponent.h"
-#include "MonsterCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Warrior/GameplayAbility/BaseGameplayAbility.h"
 

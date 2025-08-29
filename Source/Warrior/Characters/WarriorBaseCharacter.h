@@ -21,15 +21,16 @@ public:
 	AWarriorBaseCharacter();
 
 protected:
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AbilitySystem")
-	UAbilitySystemComponent* AbilitySystemComponent;
-
+	
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UCapsuleComponent* AttackCapsule;
 
 public:
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AbilitySystem")
+	UAbilitySystemComponent* AbilitySystemComponent;
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 

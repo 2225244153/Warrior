@@ -3,9 +3,11 @@
 
 #include "PlayerCharacter.h"
 
+#include "AbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Warrior/Common/ConstText.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -34,7 +36,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("MoveRight/Left"),this,&APlayerCharacter::MoveRight);
 
 	PlayerInputComponent->BindAxis(TEXT("TurnRight/LeftMouse"),this,&APlayerCharacter::TurnRight);
-	//PlayerInputComponent->BindAxis(TEXT("LookUp/DownMouse"),this,&APlayerCharacter::LookUp);
+	
 
 	
 	
@@ -52,9 +54,6 @@ void APlayerCharacter::JumpEnd()
 
 void APlayerCharacter::Attack()
 {
-	/*UAnimMontage* Melee = LoadObject<UAnimMontage>(nullptr,TEXT("/Script/Engine.AnimMontage'/Game/A_Game/Animation/Montage/AM_Attack.AM_Attack'"));
-	PlayAnimMontage(Melee);*/
-	//AbilitySystemComponent->TryActivateAbilitiesByTag()
 	ActiveAbility(0);
 }
 
@@ -83,11 +82,11 @@ void APlayerCharacter::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 {
 	if (OtherActor != this && OtherActor->GetClass() != this->GetClass())
 	{
-		/*if (AWarriorBaseCharacter* BaseCharacter = Cast<AWarriorBaseCharacter>(OtherActor))
+		if (AWarriorBaseCharacter* BaseCharacter = Cast<AWarriorBaseCharacter>(OtherActor))
 		{
-		UE_LOG(LogTemp,Error,TEXT("PlayerCharacter::OnComponentBeginOverlap"));
-		}*/
-		UE_LOG(LogTemp,Error,TEXT("Name = %s"),*UKismetSystemLibrary::GetDisplayName(OtherActor));
+			UGameplayEffect* MeleeDamage = LoadObject<UGameplayEffect>(nullptr,TEXT("/Script/Engine.Blueprint'/Game/A_Game/Abilities/FirstMelee/GE_Melee_Damage.GE_Melee_Damage'"));
+			
+		}
 	}
 }
 

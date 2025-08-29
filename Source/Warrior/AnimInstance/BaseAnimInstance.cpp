@@ -28,3 +28,8 @@ void UBaseAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		bIsJumping = BaseCharacter->GetCharacterMovement()->IsFalling();
 	}
 }
+
+void UBaseAnimInstance::PrintLog(FString Str)
+{
+	UE_LOG(LogTemp,Error,TEXT("%s"),*Str);
+}

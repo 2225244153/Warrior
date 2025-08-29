@@ -21,17 +21,20 @@ protected:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 	
 public:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	AWarriorBaseCharacter* BaseCharacter;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float Speed;
 
-	UPROPERTY(blueprintReadWrite)
+	UPROPERTY(blueprintReadWrite,EditAnywhere)
 	float Direction;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	bool bIsJumping;
+
+	UFUNCTION(BlueprintCallable)
+	void PrintLog(FString Str = TEXT("AnimInstance"));
 
 	
 	
