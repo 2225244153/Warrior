@@ -11,13 +11,13 @@ public class Warrior : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
-			"Core", "CoreUObject", "Engine", "InputCore" 
-			,"GameplayAbilities", "GameplayTags", "GameplayTasks"
-			,"UMG", "Slate", "SlateCore"
-			,"EnhancedInput"
+			"Core", "CoreUObject", "Engine", "InputCore", "AnimGraphRuntime"
+			, "GameplayTags", "GameplayTasks","UMG", "Slate", "SlateCore"
+			,"EnhancedInput","DeveloperSettings"
+			, "AIModule"
 		});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "AnimGraphRuntime", });
+		PrivateDependencyModuleNames.AddRange(new string[] {"GameplayAbilities"});
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

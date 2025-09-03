@@ -4,14 +4,44 @@
 #include "PlayerCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "Warrior/Common/ConstText.h"
 
 APlayerCharacter::APlayerCharacter()
 {
+	//Set this character to call Tick() every frame,
+	PrimaryActorTick.bCanEverTick = false;
 
+	//Don't rotate when the controller rotates. Let that just affect the camera
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+
+	//Configure character movement
+	//Character moves in the direction of input
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	//Create a SpringArm and set up attach to RootComponent
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(RootComponent);
+	//rotate the arm based on the controller
+	SpringArm->bUsePawnControlRotation = true;
+	//the Camera follows at this distance behind the character
+	SpringArm->SocketOffset =  FVector(0, 30, 80);
+
+
+	//Create a follow Camera 
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+	//Let the follow camera attach to the spring arm 
+	FollowCamera->SetupAttachment(SpringArm);
+	//Camera does not rotate relative to arm
+	FollowCamera->bUsePawnControlRotation = false;
+
+	
+	
 }
 
 void APlayerCharacter::BeginPlay()
@@ -84,8 +114,8 @@ void APlayerCharacter::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 	{
 		if (AWarriorBaseCharacter* BaseCharacter = Cast<AWarriorBaseCharacter>(OtherActor))
 		{
-			UGameplayEffect* MeleeDamage = LoadObject<UGameplayEffect>(nullptr,TEXT("/Script/Engine.Blueprint'/Game/A_Game/Abilities/FirstMelee/GE_Melee_Damage.GE_Melee_Damage'"));
-			
+			/*UGameplayEffect* MeleeDamage = LoadObject<UGameplayEffect>(nullptr,TEXT("/Script/Engine.Blueprint'/Game/A_Game/Abilities/FirstMelee/GE_Melee_Damage.GE_Melee_Damage'"));
+			FGameplayEffectSpecHandle GameplayEffectSpecHandle = Ma*/
 		}
 	}
 }
